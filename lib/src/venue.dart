@@ -1,22 +1,24 @@
 import 'dart:async';
 
 import 'api.dart';
+import 'location.dart';
 
 class Venue {
-  Venue({this.venueId, this.name, this.location, this.city, this.state, this.cc, this.category, this.rating});
+  Venue({this.venueId, this.name, this.formattedAddress, this.city, this.state, this.cc, this.category, this.rating, this.location});
 
   final String? venueId;
   final String? name;
-  final String? location;
+  final String? formattedAddress;
   final String? city;
   final String? state;
   final String? cc;
   final String? category;
   final double? rating;
+  final Location? location;
 
   @override
   String toString() {
-    return '$venueId, $name, $location, $category, $rating';
+    return '$venueId, $name, $formattedAddress, $category, $rating';
   }
 
   bool operator ==(otherVenue) => otherVenue is Venue && venueId == otherVenue.venueId;
@@ -26,7 +28,8 @@ class Venue {
     return Venue(
         venueId: json!['id'],
         name: json['name'],
-        location: json['location']['formattedAddress'].join(', ') ?? null,
+        location: json['location'],
+        formattedAddress: json['location']['formattedAddress'].join(', ') ?? null,
         city: json['location']['city'] ?? null,
         state: json['location']['state'] ?? null,
         cc: json['location']['cc'] ?? null,
