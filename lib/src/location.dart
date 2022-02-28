@@ -14,8 +14,8 @@ class Location {
 
   final String? address;
   final String? crossStreet;
-  final String? lat;
-  final String? lng;
+  final double? lat;
+  final double? lng;
   final String? distance;
   final String? postalCode;
   final String? cc;
